@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms. Soto's Classroom Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. SETUP */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #f0f2f5; font-family: 'Lato', sans-serif; display: flex; justify-content: center; padding: 20px; }
+
+        /* DASHBOARD CONTAINER - Flexible Height */
+        .dashboard-container {
+            background-color: #fff9f2; 
+            width: 1280px;
+            min-height: 720px; /* Changed from fixed height to min-height */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: grid;
+            grid-template-columns: 280px 1fr 280px; 
+            grid-template-rows: 80px 1fr 100px; 
+            position: relative;
+        }
+
+        /* HEADER */
+        header {
+            grid-column: 1 / span 3;
+            background-color: #1a2a6c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border-bottom: 4px solid #20b2aa;
+            border-radius: 15px 15px 0 0; /* Keeps the top corners round */
+        }
+        header h1 { font-family: 'Poppins'; font-size: 28px; }
+        .lang-toggle { background: #ff6b6b; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; }
+
+        /* SIDEBARS */
+        aside { padding: 15px; display: flex; flex-direction: column; gap: 15px; background: rgba(32, 178, 170, 0.05); }
+        .card { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #20b2aa; }
+        .card h3 { font-family: 'Poppins'; font-size: 16px; margin-bottom: 10px; color: #1a2a6c; display: flex; align-items: center; gap: 8px; }
+        .card p, .card li { font-size: 13px; color: #444; line-height: 1.4; }
+
+        /* LEFT SIDEBAR: IDENTITY & VOICE */
+        .left-sidebar .avatar-box { text-align: center; margin-bottom: 10px; }
+        .left-sidebar .avatar-box img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #20b2aa; object-fit: cover; background: white; }
+        .agreement-list { list-style: none; }
+        .agreement-list li { margin-bottom: 5px; font-size: 12px; display: flex; gap: 5px; }
+
+        /* MAIN CENTER: THE CLASSROOM HUB */
+        main { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .hero-banner { 
+            background: linear-gradient(135deg, #20b2aa, #1a2a6c);
+            height: 200px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-banner h2 { font-size: 32px; font-family: 'Poppins'; }
+        
+        .resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .resource-btn { 
+            background: white; 
+            border: 2px solid #e2e8f0; 
+            padding: 15px; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .resource-btn:hover { border-color: #20b2aa; background: #f0fdfa; }
+        .resource-btn i { font-size: 24px; color: #ff6b6b; }
+        .resource-btn div b { display: block; font-size: 14px; color: #1a2a6c; }
+        .resource-btn div span { font-size: 12px; color: #666; }
+
+        /* RIGHT SIDEBAR: COMMUNITY & UPDATES */
+        .right-sidebar .monday-check { background: #fffbeb; border-color: #f59e0b; }
+        .cultural-link { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 13px; color: #1a2a6c; font-weight: bold; }
+
+        /* FOOTER: CONTACT */
+        footer {
+            grid-column: 1 / span 3;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 30px;
+            border-radius: 0 0 15px 15px; /* Keeps the bottom corners round */
+        }
+        .contact-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #475569; }
+        .contact-item i { color: #20b2aa; font-size: 18px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <header>
+            <div>
+                <h1>Ms. Soto's Math Classroom</h1>
+            </div>
+            <div class="lang-toggle">
+                <i class="fa-solid fa-language"></i> Need directions in Spanish? Click here.
+            </div>
+        </header>
+
+        <aside class="left-sidebar">
+            <div class="avatar-box">
+                <img src="my-avatar.png" alt="Ms. Soto">
+                <p style="font-weight: bold; margin-top: 5px; color: #1a2a6c;">Ms. Soto (Soh-toh)</p>
+                <p style="font-size: 11px;">Algebra & Statistics Teacher</p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-id-card"></i> Meet Your Teacher</h3>
+                <p>🎓 First-generation college graduate<br>🇵🇷 Proud Puerto Rican & bilingual<br>☕ Loves coffee, traveling, and math<br>💙 I believe mistakes help us learn</p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-handshake"></i> Our Agreements</h3>
+                <ul class="agreement-list">
+                    <li><i class="fa-solid fa-check" style="color: green;"></i> Respect all cultures</li>
+                    <li><i class="fa-solid fa-check" style="color: green;"></i> Cameras optional</li>
+                    <li><i class="fa-solid fa-check" style="color: green;"></i> Different opinions welcome</li>
+                    <li><i class="fa-solid fa-check" style="color: green;"></i> Everyone is heard</li>
+                    <li><i class="fa-solid fa-check" style="color: green;"></i> Ask questions without fear of being wrong</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main>
+            <div class="hero-banner">
+                <div>
+                    <img src="welcome-bitmoji.png" alt="Welcome Bitmoji" style="height: 90px; margin-bottom: 10px;">
+                    <h2>Welcome to the Family!</h2>
+                    <p style="color: #e2e8f0; font-style: italic;">"Every student belongs here. Every culture, every language, every voice matters."</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ff6b6b;">
+                <h3><i class="fa-solid fa-bullhorn"></i> Student Voice Center</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="background: #f0fdfa; padding: 10px; border-radius: 8px; flex: 1; text-align: center;">
+                        <i class="fa-solid fa-user-secret" style="color: #20b2aa;"></i><br><span style="font-size: 11px;">Anonymous Q&A</span>
+                    </div>
+                    <div style="background: #f0fdfa; padding: 10px; border-radius: 8px; flex: 1; text-align: center;">
+                        <i class="fa-solid fa-calendar-check" style="color: #20b2aa;"></i><br><span style="font-size: 11px;">Weekly Check-in</span>
+                    </div>
+                    <div style="background: #f0fdfa; padding: 10px; border-radius: 8px; flex: 1; text-align: center;">
+                        <i class="fa-solid fa-tasks" style="color: #20b2aa;"></i><br><span style="font-size: 11px;">Choice Board</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-grid">
+                <div class="resource-btn">
+                    <i class="fa-solid fa-book"></i>
+                    <div><b>Math Vocabulary</b><span>English & Espa&ntilde;ol</span></div>
+                </div>
+                <div class="resource-btn">
+                    <i class="fa-solid fa-video"></i>
+                    <div><b>Recorded Lessons</b><span>Watch anytime</span></div>
+                </div>
+                <div class="resource-btn">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <div><b>Tech Help</b><span>Zoom & Canvas</span></div>
+                </div>
+                <div class="resource-btn">
+                    <i class="fa-solid fa-pencil"></i>
+                    <div><b>Homework Help</b><span>Step-by-step guides</span></div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="right-sidebar">
+            <div class="card monday-check">
+                <h3><i class="fa-solid fa-sun"></i> Weekly Connection</h3>
+                <p><b>This Week's Prompt:</b><br>"Share a tradition your family celebrates."</p>
+                <div style="background: #ff6b6b; color: white; padding: 5px; border-radius: 5px; text-align: center; margin-top: 10px; font-size: 12px; cursor: pointer;">Post your answer here!</div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-chart-line"></i> Math in Our Communities</h3>
+                <div class="cultural-link"><i class="fa-solid fa-users" style="font-size: 16px;"></i> Widefield, CO Population</div>
+                <div class="cultural-link"><i class="fa-regular fa-snowflake" style="font-size: 16px;"></i> Colorado Snowfall</div>
+                <div class="cultural-link"><i class="fa-solid fa-basketball" style="font-size: 16px;"></i> NBA Statistics</div>
+                <div class="cultural-link"><i class="fa-solid fa-store" style="font-size: 16px;"></i> Local Business Budgets</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #f59e0b;">
+                <h3><i class="fa-solid fa-users-rays"></i> Family Resources</h3>
+                <div style="font-size: 13px; line-height: 1.6;">
+                    <a href="#" style="color: #20b2aa; text-decoration: none;"><b>Family Portal:</b> English</a> | 
+                    <a href="#" style="color: #ff6b6b; text-decoration: none;">Espa&ntilde;ol</a><br>
+                    <i class="fa-solid fa-briefcase-medical" style="color: #666; margin-top: 5px; width: 15px;"></i> Community Resources<br>
+                    <i class="fa-solid fa-user-nurse" style="color: #666; width: 15px;"></i> School Counselor
+                </div>
+            </div>
+        </aside>
+
+        <footer>
+            <div class="contact-item">
+                <i class="fa-solid fa-video"></i>
+                <span><b>Zoom Office Hours:</b> Tue/Thu 3:30PM</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>sotonicole@wsd3.org</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-calendar-alt"></i>
+                <span>Book a 1-on-1 Check-in</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
